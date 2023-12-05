@@ -61,11 +61,13 @@
 \begin{frame}{Outline}
 	\begin{itemize}
 		\setlength{\itemsep}{\fill}
+		\pause
 		\item \(\dim_{\C} = 1\): Degeneration of polyhedral metrics on the \(2\)-sphere
 		
-		
+		\pause
 		\item \(\dim_{\C} = 2\): Model Calabi-Yau metrics on \(\C^2\) with cone singularities along a complex curve  
 		
+		\pause
 		\item Conjectures
 	\end{itemize}
 \end{frame}
@@ -74,12 +76,13 @@
 
 
 \begin{frame}{The \(2\)-cone \(C(2\pi\beta)\)}
-	
+	\pause
 	\begin{minipage}{0.15\textwidth}
 		\begin{block}{}
 			\(0<\beta<1\)
 		\end{block}
 	\end{minipage}
+	\pause
 	\begin{center}
 	\scalebox{0.7}{	
 	\begin{tikzpicture}
@@ -101,8 +104,11 @@
 	\end{center}
 
 \begin{itemize}
+	\pause
 	\item In polar coordinates \(g_{\beta} = dr^2 + \beta^2 r^2 d\theta^2\)
+	\pause
 	\item \textbf{Fact:} the induced complex structure on \(\R^2 \setminus \{0\}\) is \(\C^*\)
+	\pause
 	\item Proof: set \(z = r^{1/\beta}e^{i\theta}\) then \(g_{\beta}=|z|^{2\beta-2}|dz|^2\)
 \end{itemize}
 \end{frame}
@@ -111,7 +117,7 @@
 
 \begin{frame}{Constant curvature surfaces with cone singularities}
 	%\pause	
-
+	\pause
 	\begin{columns}
 		\begin{column}{.38\textwidth}
 			\[
@@ -122,7 +128,7 @@
 			\end{cases}
 			\]
 		\end{column}
-		
+	\pause	
 		\begin{column}{.58\textwidth}
 			\begin{figure}[t]
 				\centering
@@ -155,7 +161,7 @@
 	\end{columns}
 	
 \begin{columns}
-	%\pause
+	\pause
 	\begin{column}{.48\textwidth}
 		\begin{figure}
 			\scalebox{.7}{
@@ -177,7 +183,7 @@
 			\caption{Double of spherical triangle.  Constant curvature \(1\) metric on the \(2\)-sphere with \(3\) cone points.}
 		\end{figure}
 	\end{column}
-	%\pause
+	\pause
 	\begin{column}{.48\textwidth}
 		\begin{itemize}
 			\item Orbifolds: \(\beta = 1/k\) for \(k \geq 2\) integer
@@ -190,11 +196,14 @@
 
 \begin{frame}{Flat metrics on the \(2\)-sphere with cone points}
 	\begin{itemize}
+		\pause
 		\item Surface of a polyhedron in \(\R^3\)
+		\pause
 		\item Double of a polygon in \(\R^2\)
 	\end{itemize}
 
 	\begin{columns}
+	\pause	
 	\begin{column}{.48\textwidth}
 		\begin{figure}
 			\scalebox{.5}{
@@ -211,7 +220,7 @@
 			\caption{Surface of a cube. Flat metric on \(S^2\) with \(8\) cone points of total angle \(2\pi\beta=3(\pi/2)\).}
 		\end{figure}
 	\end{column}	
-	%\pause
+	\pause
 	\begin{column}{.48\textwidth}
 		\begin{figure}
 			\scalebox{.7}{
@@ -226,7 +235,7 @@
 		\end{figure}
 	\end{column}
 \end{columns}
-
+\pause
 \begin{equation}\tag{Gauss-Bonnet}
 	\mathcolorbox{green!40}{
 		\sum_{i=1}^n (1-\beta_i) = 2
@@ -234,7 +243,9 @@
 \end{equation}
 
 \begin{itemize}
+	\pause
 	\item Surface of a cube: \(8 \cdot (1-3/4) = 2\) 
+	\pause
 	\item Double of a triangle: \(3 - (\beta_1+\beta_2 + \beta_3) = 2\)
 \end{itemize}
 
@@ -242,15 +253,20 @@
 
 \begin{frame}{Existence and uniqueness}
 	\begin{itemize}
+		\pause
 		\item Fix \(\vec{\beta} = (\beta_1, \ldots, \beta_n)\) with \(\sum_{i=1}^{n}(1-\beta_i) = 2\)
+		\pause
 		\item \(\Met(\vec{\beta}) = \) flat metrics on \(S^2\) with \(n\) cone points \(x_i\) of total angle \(2\pi\beta_i\) modulo marked (orientation preserving) isometry and scale
+		\pause
 		\item \(\mM_{0,n} = \) configuration of \(n\) distinct marked points in \(\CP^1\) up to the action of M\"obius transformations \(PSL(2, \C)\)
 	\end{itemize}
 
+\pause
 \begin{theorem}[Troyanov]
 	The forgetful map \(F: \Met(\vec{\beta}) \to \mM_{0,n}\) is a bijection
 \end{theorem}
 
+\pause
 Proof: If \(x_1, \ldots, x_n \in \C\) then
 \[
 \left(\prod_{i=1}^{n} |z-x_i|^{2\beta_i-2}\right) |dz|^2
@@ -284,7 +300,6 @@ extends smoothly over \(\infty\) and defines a flat (K\"ahler) metric on \(\CP^1
 		
 		\end{tikzpicture}
 		\caption{\(\mathcolorbox{green!40}{\gamma + (1-\beta_1) + (1-\beta_2) = 1}\)}
-		\label{fig:collision}
 	\end{figure}
 \end{frame}
 
@@ -336,10 +351,15 @@ extends smoothly over \(\infty\) and defines a flat (K\"ahler) metric on \(\CP^1
 \begin{frame}{Bubble trees}
 	Consider a family of flat metrics \(g_t\) for which a cluster of cone points \(x_1(t), \ldots, x_p(t)\) collides to \(0\) as \(t \to 0\)
 	\begin{itemize}
+		\pause
 		\item For \(f \in \mathcal{O}_{\C, 0}\) let \(\nu(f) = \) order of vanishing of \(f\) at \(0\)
+		\pause
 		\item For \(r \geq 0\) we have an equivalence relation \(f \sim_r g\) if \(\nu(f-g) \geq r\)
+		\pause
 		\item If \(S = \{x_1(t), \ldots, x_p(t)\} \subset \mathcal{O}_{\C, 0}\) is a finite set then the equivalence classes of \(\sim_r\) make a tree \(\mathcal{T}\) with root \(S\) and leaves \(\{x_i(t)\}\)
-		\item To every non-leaf vertex \(\mathbf{v} \in \mathcal{T}\) we associate a model flat metric \(B_{\mathbf{v}}\) on \(\C\). The number of cone points of \(B_{\mathbf{v}}\) is equal to the number of children of \(\mathbf{v}\). 
+		\pause
+		\item To every non-leaf vertex \(\mathbf{v} \in \mathcal{T}\) we associate a model flat metric \(B_{\mathbf{v}}\) on \(\C\). The number of cone points of \(B_{\mathbf{v}}\) is equal to the number of children of \(\mathbf{v}\)
+		\pause
 		\item  The cone angles are \(2\pi\gamma_{\mathbf{w}}\) with \(1-\gamma_{\mathbf{w}} = \sum_{i | x_i \in \mathbf{w}} (1-\beta_i)\) and the position of the cone points are \(x_{\mathbf{w}} = \lim_{t \to 0} t^{-k} x_i(t)\) where \(k\) is the smallest integer such that the elements of \(\mathbf{v}\) are \emph{not} \(\sim_k\) equivalent.  
 	\end{itemize}
 \end{frame}
@@ -349,6 +369,7 @@ extends smoothly over \(\infty\) and defines a flat (K\"ahler) metric on \(\CP^1
 		\item Let \(s \in \mathcal{O}_{\C, 0}\) be a section
 		\item For \(\alpha>0\) let \(h_{\alpha}\) be the pointed Gromov-Hausdorff limit 
 		\[h_{\alpha} = \lim_{t \to 0} (|t|^{-2\alpha} \cdot g_t, s(t))\]
+		\pause
 		\item The section determines a path in the tree with vertices \(\mathbf{v}_1, \ldots, \mathbf{v}_{\ell}\)
 		\item  \(0= \alpha_0 < \alpha_1 < \ldots < \alpha_{\ell}\) such that \(h_{\alpha} = C(2\pi \gamma_{\mathbf{v}_i})\) (with base point its vertex) if \(\alpha_{i-1} < \alpha < \alpha_i\) and \(h_{\alpha} = B_{\mathbf{v}_i}\) if \(\alpha=\alpha_i\) (with base point \(\lim_{t \to 0} t^{-k}s(t)\)).
 	\end{itemize}
@@ -378,7 +399,9 @@ extends smoothly over \(\infty\) and defines a flat (K\"ahler) metric on \(\CP^1
 	\begin{itemize}
 		\setlength{\itemsep}{\fill}
 		\item Thurston: complex hyperbolic cone metric on \(\overline{\Met}(\vec{\beta})\), divisors represent collision of pair of points
+		\pause
 		\item Deligne-Mumford-Knudsen compactification \(\overline{\mM}_{0,n}\), divisors correspond to partitions of \(\{1, \ldots, n\}\) into two disjoint sets, its points represent nodal curves with \(2\) irreducible components
+		\pause
 		\item Logarithmic resolution \(\overline{\mM}_{0,n} \to \overline{\Met}(\vec{\beta})\) (Koziarz-Nguyen), points in \(\overline{\mM}_{0,n}\) represent bubble trees
 	\end{itemize}
 \end{frame}
@@ -457,9 +480,13 @@ extends smoothly over \(\infty\) and defines a flat (K\"ahler) metric on \(\CP^1
 \begin{frame}{Theory overview}
 	\begin{itemize}
 		\setlength{\itemsep}{\fill}
+		\pause
 		\item Donalson's interior Schauder estimate for the Laplace operator
+		\pause
 		\item Existence and regularity theory, polyhomogeneous expansion (Jeffress-Mazzeo-Rubinstein)
+		\pause
 		\item Chern-Weil formulas (Jian Song and Xiaowei Wang)
+		\pause
 		\item Algebraic structure on non-collapsed Gromov-Hausdorff limits (Chen-Donaldson-Sun)
 	\end{itemize}
 \end{frame}
@@ -489,6 +516,7 @@ extends smoothly over \(\infty\) and defines a flat (K\"ahler) metric on \(\CP^1
 %\begin{equation*}
 %C = \{P=0\}, \hspace{3mm} \mbox{deg}(P) = d\geq 2 .
 %\end{equation*}
+\pause
 \begin{theorem}[de Borbon, 2017]
 	\begin{enumerate}
 		\item \(\omega_{RF}^2 = \Omega \wedge \bar{\Omega}\) with \(\Omega = P^{\beta-1} dz dw \) 
@@ -769,6 +797,7 @@ extends smoothly over \(\infty\) and defines a flat (K\"ahler) metric on \(\CP^1
 		\end{tikzpicture}	
 		}
 	\end{center}
+\pause
 \(C_{\epsilon} = \{P_d(z,w) + \hot = \epsilon\} \) as \(\epsilon \to 0\). If we rescale coordinates by \(z=\epsilon^{1/d}\tilde{z}\), \(w=\epsilon^{1/d}\tilde{w}\) then \(C_{\epsilon}\) converges to \(C = \{P_d(\tilde{z}, \tilde{w}) = 1\}\) as \(\epsilon \to 0\).
 \end{frame}
 
@@ -785,17 +814,18 @@ extends smoothly over \(\infty\) and defines a flat (K\"ahler) metric on \(\CP^1
 \begin{frame}{Moduli spaces of pairs}
 	\begin{itemize}
 		\item Ascher-DeVleming-Liu: \(K\)-moduli space of pairs \((\CP^2, (1-\beta)C)\) with \(\deg C = 4\) is the GIT quotient for \(5/8 < \beta < 1\)
+		\pause
 		\item If \(\gamma = 2\beta -1\) then \(1/4 < \gamma < 1\). By Li-Sun there is a KE metric with cone angle \(2\pi\gamma\) along \(C_0 = \{Q=0\}\) where \(Q=X_0^2+X_1^2+X_2^2\).
-		
+		\pause
 		\item Let \(P\) be a generic homogeneous degree \(4\) and \(C_{\epsilon} = \{\epsilon P + Q^2=0\}\). There are eight branch points \(\{P=0\} \cap \{Q=0\}\)
-		
+		\pause
 		\item Family of KE metrics $g_{\epsilon}$ with cone angle $2\pi\beta$  along $C_{\epsilon}$ and a limiting KE metric $g_0$ with cone angle $2\pi\gamma$ along $C_0$
-		
+		\pause
 		\item The convergence \(g_{\epsilon} \to g_0\) is modelled 
 		in directions transverse to \(C_0\) by two cone points of angle \(2\pi\beta\) which collide into a single cone point of angle \(2\pi\gamma\)
-		
+		\pause
 		 \item It is expected that the parabola CY metric is a re-scaled limit of the sequence \(g_{\epsilon}\) at each of the eight branch points
-		 
+		 \pause
 		 \item The Song-Wang energy formula \(E=\chi(X) + (\beta-1)\chi(D)\) gives \(E(g_{\epsilon}) - E(g_0) = 8 (1-\beta)\) 
 	\end{itemize}
 		
@@ -807,18 +837,21 @@ extends smoothly over \(\infty\) and defines a flat (K\"ahler) metric on \(\CP^1
 	Non-collapsed polarized KE limit space \((X, d_{KE})\)
 	\[C_p X := \lim_{\lambda \to 0} (X, \lambda^{-1}d_{KE},p)\]
 	\begin{itemize}
+		\pause
 		\item Uniqueness, \(C_pX\) is an affine algebraic variety (Donaldson-Sun).\\
 		Order of vanishing w.r.t. \(d_{KE}\) \(\implies\) two steps degeneration.
+		\pause
 		\item \(C_pX\) depends only on \(\mathcal{O}_{X,p}\) (the germ of \(X\) at \(p\)). \\
 		Chi Li's normalized volumes of valuations.
 	\end{itemize}
-	
+	\pause
 	Sasaki geometry precedents: Martelli-Sparks-Yau (volume minimization),
-	Collins-Sz\'ekelyhidi (K-stability) .
+	Collins-Sz\'ekelyhidi (K-stability) 
+	\pause
 	\begin{block}{Question}
 		Describe all possible rescaled limits of a family.
 	\end{block}
-	
+	\pause
 	Song Sun's \emph{minimal bubbles}.
 	
 \end{frame}
