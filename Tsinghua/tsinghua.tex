@@ -1,0 +1,798 @@
+\documentclass{beamer}
+%
+% Choose how your presentation looks.
+%
+% For more themes, color themes and font themes, see:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+%
+\mode<presentation>
+{
+  \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+  \usecolortheme{beaver} % or try albatross, beaver, crane, ...
+  \usefonttheme{serif}  % or try serif, structurebold, ...
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{caption}[numbered]
+} 
+
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{shapes,snakes,arrows, chains, positioning, shapes.geometric, shapes.symbols,calc,shadows}
+
+%tikzxommand
+\def\centerarc[#1](#2)(#3:#4:#5)% Syntax: [draw options] (center) (initial angle:final angle:radius)
+{ \draw[#1] ($(#2)+({#5*cos(#3)},{#5*sin(#3)})$) arc (#3:#4:#5); }
+
+
+%commands
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\CP}{\mathbb{CP}}
+\newcommand{\mM}{\mathcal{M}}
+
+\newcommand{\ddb}{\partial\overline{\partial}}
+\DeclareMathOperator{\Met}{Met}
+
+\newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
+
+\title[]{Bubbling of K\"ahler-Einstein metrics with cone singularities: examples in dimensions \(1\) and \(2\)}
+\author[Martin de Borbon]{Martin de Borbon (joint with Cristiano Spotti)}
+\institute[Loughborough]{Seminar at Tsinghua University}
+\date{5 December 2023}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Uncomment these lines for an automatically generated outline.
+%\begin{frame}{Outline}
+%  \tableofcontents
+%\end{frame}
+
+\section{Introduction}
+
+\begin{frame}{Outline}
+	\begin{itemize}
+		\setlength{\itemsep}{\fill}
+		\item \(\dim_{\C} = 1\): Degeneration of polyhedral metrics on the \(2\)-sphere
+		
+		
+		\item \(\dim_{\C} = 2\): Model Calabi-Yau metrics on \(\C^2\) with cone singularities along a complex curve  
+		
+		\item Higher dimensions, conjectures
+	\end{itemize}
+\end{frame}
+
+\section{dim 1}
+
+
+\begin{frame}{The \(2\)-cone \(C(2\pi\beta)\)}
+	
+	\begin{minipage}{0.15\textwidth}
+		\begin{block}{}
+			\(0<\beta<1\)
+		\end{block}
+	\end{minipage}
+	\begin{center}
+	\scalebox{0.7}{	
+	\begin{tikzpicture}
+	%leftpart
+	\filldraw[fill=green!20, draw=blue] (-2,0) -- (0,0) arc (0:220:2) -- (-2,0);
+	\centerarc[thick](-2,0)(5:215:.7);
+	\centerarc[<->,dashed,thick](-2,0)(225:355:1);
+	%middle arrow
+	\draw[->,dashed,thick] (1,1) to (3,1);
+	%rightpart
+	\filldraw[fill=green!20] (4,2) to[bend right] (7,2) -- (5.5,-1) -- cycle;
+	\draw[dotted,thick] (4,2) to[bend left] (7,2);
+	%nodes
+	\node[scale=1.3](a) at (-2,1.1){\(2\pi\beta\)};
+	\node[scale=1.3](b) at (0,-.5){identify};
+	%\node[fill=red!20,draw,rounded corners, scale=1.5](c) at (-4.5,2.5){\(0<\beta<1\)};
+	\end{tikzpicture}
+	}
+	\end{center}
+
+\begin{itemize}
+	\item In polar coordinates \(g_{\beta} = dr^2 + \beta^2 r^2 d\theta^2\)
+	\item \textbf{Fact:} the induced complex structure on \(\R^2 \setminus \{0\}\) is \(\C^*\)
+	\item Proof: set \(z = r^{1/\beta}e^{i\theta}\) then \(g_{\beta}=|z|^{2\beta-2}|dz|^2\)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Flat metrics on the \(2\)-sphere with cone points}
+	\begin{itemize}
+		\item Surface of a polyhedron in \(\R^3\)
+		\item Double of a polygon in \(\R^2\)
+	\end{itemize}
+
+	\begin{columns}
+	\begin{column}{.48\textwidth}
+		\begin{figure}
+			\scalebox{.5}{
+				\begin{tikzpicture}
+				\draw (0,0) -- (2,0) -- (2,2) -- (0,2) -- (0,0);
+				\draw (2.7,.7) -- (2.7,2.7) -- (.7,2.7);
+				\draw[dashed] (0.7,2.7) -- (0.7,0.7) -- (2.7,0.7);
+				\draw[dashed] (0,0) -- (.7,.7);
+				\draw (0,2) -- (.7,2.7);
+				\draw (2,0) -- (2.7,.7);
+				\draw (2,2) -- (2.7, 2.7);
+				\end{tikzpicture}
+			}
+			\caption{Surface of a cube. Flat metric on \(S^2\) with \(8\) cone points of total angle \(2\pi\beta=3(\pi/2)\).}
+		\end{figure}
+	\end{column}	
+	%\pause
+	\begin{column}{.48\textwidth}
+		\begin{figure}
+			\scalebox{.7}{
+				\begin{tikzpicture}
+				\draw (-1,0) -- (0,2) -- (1,0) -- cycle;
+				\draw[dashed] (-.7, .6) to[bend left] (-.4, 0) to[bend left] (-.7, .6);
+				\draw[dashed] (.7, .6) to[bend left] (.4, 0) to[bend left] (.7, .6);
+				\draw[dashed] (-.3, 1.4) to[bend right] (.3, 1.4) to[bend right] (-.3, 1.4);
+				\end{tikzpicture}		
+			}
+			\caption{Double of a triangle with interior angles \(\pi\beta_i\). Flat metric on \(S^2\) with \(3\) cone points of total angle \(2\pi\beta_i\)}
+		\end{figure}
+	\end{column}
+\end{columns}
+
+\begin{equation}\tag{Gauss-Bonnet}
+	\mathcolorbox{green!40}{
+		\sum_{i=1}^n (1-\beta_i) = 2
+	}
+\end{equation}
+
+\begin{itemize}
+	\item Surface of a cube: \(8 \cdot (1-3/4) = 2\) 
+	\item Double of a triangle: \(3 - (\beta_1+\beta_2 + \beta_3) = 2\)
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Existence and uniqueness}
+	\begin{itemize}
+		\item Fix \(\vec{\beta} = (\beta_1, \ldots, \beta_n)\) with \(\sum_{i=1}^{n}(1-\beta_i) = 2\)
+		\item \(\Met(\vec{\beta}) = \) flat metrics on \(S^2\) with \(n\) cone points \(x_i\) of total angle \(2\pi\beta_i\) modulo marked (orientation preserving) isometry and scale
+		\item \(\mM_{0,n} = \) configuration of \(n\) distinct marked points in \(\CP^1\) up to the action of M\"obius transformations \(PSL(2, \C)\)
+	\end{itemize}
+
+\begin{theorem}[Troyanov]
+	The forgetful map \(F: \Met(\vec{\beta}) \to \mM_{0,n}\) is a bijection
+\end{theorem}
+
+Proof: If \(x_1, \ldots, x_n \in \C\) then
+\[
+\left(\prod_{i=1}^{n} |z-x_i|^{2\beta_i-2}\right) |dz|^2
+\]
+extends smoothly over \(\infty\) and defines a flat (K\"ahler) metric on \(\CP^1\) with cone angles \(2\pi\beta_i\) at the points \(x_i\)
+
+\end{frame}
+
+\begin{frame}{Collision of two cone points}
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}	
+		\fill[yellow!40] (5.5, 0) -- (8, 0) -- (8, 2) -- (6, 1) ;
+		\draw[dashed] (4, 0) to (5.5,0);
+		\draw[] (5.5, 0) to (8,0);
+		\draw[dashed] (4, 0) to (6,1);
+		\draw[] (6, 1) to (8, 2);
+		\draw[red, thick] (5.5, 0) to (6,1);
+		\centerarc[](5.5,0)(0:60:.3);
+		\centerarc[](6,1)(-109:19:.3);
+		\centerarc[](4,0)(0:28: .5);
+		
+		%labels
+		\draw  (4, -0.3) node (asd) [scale=.9] {\(\pi \gamma\)};
+		\draw  (5.5, -.3) node (asd) [scale=.9] {\(\pi \beta_1\)};
+		\draw  (6.6, .8) node (asd) [scale=.9] {\(\pi \beta_2\)};
+		\draw (5.5,.45) node (asd) [scale=.9] {$\epsilon$};
+		%\draw  (4, 2) node (asd) [scale=.9] {$\gamma + (1-\beta_1) + (1-\beta_2) = 1$};
+		
+		
+		\end{tikzpicture}
+		\caption{\(\mathcolorbox{green!40}{\gamma + (1-\beta_1) + (1-\beta_2) = 1}\)}
+		\label{fig:collision}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Model flat metrics on \(\C\) with cone points}
+	\begin{columns}
+		\begin{column}{.48\textwidth}
+			\begin{itemize}
+				\item \(\mathcolorbox{orange!30}{\sum_{i=1}^{p}(1-\beta_i)<1}\)
+				\[
+				g_F = \left(\prod_{i=1}^{p}|z-x_i|^{2\beta_i-2}\right)|dz|^2
+				\]
+				\item flat K\"ahler metric on \(\C\) with cone angles \(2\pi\beta_i\) at \(x_i\)
+				\item isometric to the \(2\)-cone \(C(2\pi\gamma)\) outside a compact set 
+				\[
+				\mathcolorbox{green!40}{
+				1 - \gamma = \sum_{i=1}^{p}(1-\beta_i)
+				}
+				\]
+			\end{itemize}
+		\end{column}
+		\begin{column}{.48\textwidth}
+			\begin{figure}
+				\centering
+				\scalebox{.5}{
+					\begin{tikzpicture}
+					\fill[yellow!40] (-5, 5) -- (-2,-1) -- (-1, 0) -- (0,-1) -- (1, 0) -- (2,-1) -- (5,5) to[bend right] (-5,5);
+					\draw (-5, 5) -- (-2,-1) -- (-1, 0) -- (0,-1) -- (1, 0) -- (2,-1) -- (5,5);
+					\draw[dashed] (-5,5) to[bend left] (5,5);
+					\draw (-5,5) to[bend right] (5,5);
+					\draw (-2.25, -.5) to[bend right] (-1.5,.-.5);
+					\draw[dashed] (-2.25, -.5) to[bend left] (-1.5,.-.5);
+					\draw (1.5, -.5) to[bend right] (2.25,.-.5);
+					\draw[dashed] (1.5, -.5) to[bend left] (2.25,.-.5);
+					\draw (-.5,-.5) to[bend right] (.5,-.5);
+					\draw[dashed] (-.5,-.5) to[bend left] (.5,-.5);
+					
+					\node[scale=1.5] at (0,-1.3) {$2\pi\beta_i$};
+					\node[scale=1.5] at (0,3.9) {$2\pi\gamma$};
+					\end{tikzpicture}
+				}
+			\end{figure}
+			\[
+			\lim_{\lambda \to 0} \lambda \cdot g_F = C(2\pi\gamma)
+			\]
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Bubble trees}
+	Consider a family of flat metrics \(g_t\) for which a cluster of cone points \(x_1(t), \ldots, x_p(t)\) collides to \(0\) as \(t \to 0\)
+	\begin{itemize}
+		\item For \(f \in \mathcal{O}_{\C, 0}\) let \(\nu(f) = \) order of vanishing of \(f\) at \(0\)
+		\item For \(r \geq 0\) we have an equivalence relation \(f \sim_r g\) if \(\nu(f-g) \geq r\)
+		\item If \(S = \{x_1(t), \ldots, x_p(t)\} \subset \mathcal{O}_{\C, 0}\) is a finite set then the equivalence classes of \(\sim_r\) make a tree \(\mathcal{T}\) with root \(S\) and leaves \(\{x_i(t)\}\)
+		\item To every non-leaf vertex \(\mathbf{v} \in \mathcal{T}\) we associate a model flat metric \(B_{\mathbf{v}}\) on \(\C\). The number of cone points of \(B_{\mathbf{v}}\) is equal to the number of children of \(\mathbf{v}\). 
+		\item  The cone angles are \(2\pi\gamma_{\mathbf{w}}\) with \(1-\gamma_{\mathbf{w}} = \sum_{i | x_i \in \mathbf{w}} (1-\beta_i)\) and the position of the cone points are \(x_{\mathbf{w}} = \lim_{t \to 0} t^{-k} x_i(t)\) where \(k\) is the smallest integer such that the elements of \(\mathbf{v}\) are \emph{not} \(\sim_k\) equivalent.  
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Rescaled limits}
+	\begin{itemize}
+		\item Let \(s \in \mathcal{O}_{\C, 0}\) be a section
+		\item For \(\alpha>0\) let \(h_{\alpha}\) be the pointed Gromov-Hausdorff limit 
+		\[h_{\alpha} = \lim_{t \to 0} (|t|^{-2\alpha} \cdot g_t, s(t))\]
+		\item The section determines a path in the tree with vertices \(\mathbf{v}_1, \ldots, \mathbf{v}_{\ell}\)
+		\item  \(0= \alpha_0 < \alpha_1 < \ldots < \alpha_{\ell}\) such that \(h_{\alpha} = C(2\pi \gamma_{\mathbf{v}_i})\) (with base point its vertex) if \(\alpha_{i-1} < \alpha < \alpha_i\) and \(h_{\alpha} = B_{\mathbf{v}_i}\) if \(\alpha=\alpha_i\) (with base point \(\lim_{t \to 0} t^{-k}s(t)\)).
+	\end{itemize}
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}
+		\path (0,0) node(r) {$\{x_1, \ldots, x_4\}$} 
+		(-2,-1) node(a) {$\{x_1, x_2, x_3\}$}
+		(2,-1) node(b) {$\{x_4 = t^2\}$}
+		(-4,-2) node(c) {$\{x_1 = t\}$}
+		(-2,-2) node(d) {$\{x_2 = t - t^4\}$}
+		(.5,-2) node(e) {$\{x_3 = t + t^4\}$};
+		\draw[->, red, thick] (r) to (a);
+		\draw[->] (r) to (b);
+		\draw[->] (a) to (c);
+		\draw[->, red, thick] (a) to (d);
+		\draw[->] (a) to (e);
+		\end{tikzpicture}
+		\caption{$s(t) = t - t^4 + \text{(h.o.t.)}$ shown in red where \(\mathcal{T}\)}
+		\label{fig:polytreepath}
+	\end{figure}
+	
+\end{frame}
+
+\begin{frame}{Cone singularities}
+	%\pause	
+	\begin{columns}
+		\begin{column}{.48\textwidth}
+			Fix \(\beta>0\).
+			\textbf{The \(2\)-cone of total angle \(2\pi\beta\)}.	
+			In polar coordinates
+			\[dr^2+ \beta^2 r^2 d\theta^2\]
+		\end{column}
+		\begin{column}{.48\textwidth}
+			\begin{center}
+				\scalebox{0.5}{	
+					\begin{tikzpicture}
+					%leftpart
+					\filldraw[fill=green!20, draw=blue] (-2,0) -- (0,0) arc (0:220:2) -- (-2,0);
+					\centerarc[thick](-2,0)(5:215:.7);
+					\centerarc[<->,dashed,thick](-2,0)(225:355:1);
+					%middle arrow
+					\draw[->,dashed,thick] (1,1) to (3,1);
+					%rightpart
+					\filldraw[fill=green!20] (4,2) to[bend right] (7,2) -- (5.5,-1) -- cycle;
+					\draw[dotted,thick] (4,2) to[bend left] (7,2);
+					%nodes
+					\node[scale=1.3](a) at (-2,1.1){\(2\pi\beta\)};
+					\node[scale=1.3](b) at (0,-.5){identify};
+					%\node[fill=red!20,draw,rounded corners, scale=1.5](c) at (-4.5,2.5){\(0<\beta<1\)};
+					\end{tikzpicture}
+				}
+			\end{center}
+			
+		\end{column}
+	\end{columns}	
+	%\pause	
+	
+	\begin{columns}
+		\begin{column}{.38\textwidth}
+			\[
+			\begin{cases}
+			dr^2 + \beta^2\sin^2 r d\theta^2  \\
+			dr^2 + \beta^2 r^2 d\theta^2 \\
+			dr^2 + \beta^2 \sinh^2r d\theta^2 
+			\end{cases}
+			\]
+		\end{column}
+		
+		\begin{column}{.58\textwidth}
+			\begin{figure}[t]
+				\centering
+				\scalebox{.7}{
+					\begin{tikzpicture}
+					\filldraw[fill=green!50, draw=black] (-1,2) -- (0,0) -- (1,2) to[bend left] (-1,2);
+					\draw[dashed] (-1,2) to[bend left] (1,2);
+					
+					\filldraw[fill=green!50, draw=black] (-4,2) to[bend right] (-3,0) to[bend right] (-2,2) to[bend left] (-4,2);
+					\draw[dashed] (-4,2) to[bend left] (-2,2);
+					
+					\filldraw[fill=green!50, draw=black] (2,2) to[bend left] (3,0) to[bend left] (4,2) to[bend left] (2,2);
+					\draw[dashed] (2,2) to[bend left] (4,2);
+					
+					%\node[scale=1.4] at (-3,-.4) {\(K=1\)};
+					%\node[scale=1.4] at (0,-.4) {\(K=0\)};
+					%\node[scale=1.4] at (3,-.4) {\(K=-1\)};
+					
+					\node[] at (-3,2.6) {\((2\pi\beta)\sin r\)};
+					\node[] at (0,2.6) {\((2\pi\beta)r\)};
+					\node[] at (3,2.6) {\((2\pi\beta)\sinh r\)};
+					
+					\node[] at (-4.1,1) {\(r\)};
+					\node[] at (-.8,1) {\(r\)};
+					\node[] at (2.6,1) {\(r\)};
+					\end{tikzpicture}	
+				}
+			\end{figure}
+		\end{column}
+	\end{columns}
+	
+
+\end{frame}
+
+
+
+\begin{frame}{K\"ahler-Einstein metrics}
+	\begin{columns}
+		\begin{column}{0.4\textwidth}
+			\(D \subset X\) \emph{smooth} complex hypersurface and \(0<\beta<1\) 
+		\end{column}
+		\begin{column}{0.1\textwidth}
+			\(\hspace{7mm} \longleftrightarrow\)
+		\end{column}
+		\begin{column}{0.4\textwidth}
+			\begin{equation*}
+			\mbox{\Large \(
+				(X, (1-\beta)D) \)
+			}
+			\end{equation*}
+		\end{column}
+	\end{columns}
+	
+\begin{center}
+	\scalebox{0.7}{
+	\begin{tikzpicture}
+	\filldraw[yellow!40] plot [smooth cycle] coordinates {(-2,0) (1,3) (3,1) (2,-.5) (0,-2)};
+	\draw (0,1) circle[radius=.7]; 
+	\draw [blue, thick] plot [smooth, tension=.7] coordinates { (-1,0) (0,1) (1,1) (1.5,0) (2,-.3)};
+	\draw[->, dashed] (.7,1.5) to[bend left] (8,1.5);
+	\draw[blue, thick] (10,-2) to (10,3);
+	
+	%cones
+	\draw[green,thick] (10,-.5) to (11,0);
+	\draw[green,thick] (10,-0.5) to (11,-1);
+	%\draw[green, thick, dashed] (9,-1) to[bend left] (9,0);
+	%\draw[green, thick, dashed] (9,-1) to[bend right] (9,0);
+	\draw[green, thick, dashed] (11,-1) to[bend left] (11,0);
+	\draw[green, thick, dashed] (11,-1) to[bend right] (11,0);
+	\draw[green,thick] (10,1.5) to (11,2);
+	\draw[green,thick] (10,1.5) to (11,1);
+	%\draw[green, thick, dashed] (9,1) to[bend left] (9,2);
+	%\draw[green, thick, dashed] (9,1) to[bend right] (9,2);
+	\draw[green, thick, dashed] (11,1) to[bend left] (11,2);
+	\draw[green, thick, dashed] (11,1) to[bend right] (11,2);
+	%\draw[green, thick] (-.4,1.3) .. controls (0,1) .. (.4,.6);
+	%\draw[green, thick] (-.1,.55) .. controls (0,1) .. (0.1,1.45);	
+	\draw[green,thick] (-.4,1.3) to (0,1);
+	\draw[green,thick] (0.1,1.45) to (0,1);
+	\draw[green, thick, dashed] (-.4,1.3) to[bend left] (0.1,1.45);
+	\draw[green, thick, dashed] (-.4,1.3) to[bend right] (0.1,1.45);
+	%\draw[green, thick, dashed] (.4,.6) to[bend left] (-.1,.55);
+	%\draw[green, thick, dashed] (.4,.6) to[bend right] (-.1,.55);
+	
+	%nodes
+	\node[scale=1.3](a) at (0,-1){\(X\)};
+	\node[scale=1.3, blue](b) at (1.5,.8){\(D\)};
+	\node[scale=1](c) at (11.6,1.5){\(2\pi\beta\)};
+	\node[scale=1.3](a) at (12,3){\(\C_{\beta} \times \C^{n-1}\)};
+	\end{tikzpicture}
+	}
+\end{center}
+\begin{equation*}
+	\mbox{Ric}(g_{KE}) = \lambda g_{KE} \hspace{1mm} \mbox{ on } \hspace{1mm} X \setminus D \hspace{1mm} \mbox{ and } \hspace{1mm}  g_{KE} \sim g_{\C_{\beta} \times \C^{n-1}} \hspace{1mm} \mbox{ around }  D 
+\end{equation*}	
+\begin{itemize}
+	\item Donalson's Schauder estimate, existence and regularity theory, polyhomogeneous expansion, Chern-Weil, algebraic structure on non-collapsed GH limits, etc. Extensions to s.n.c. divisors.
+\end{itemize}
+\end{frame}
+
+
+\section{PhD}
+
+\begin{frame}{Model Ricci-flat solutions}
+\begin{columns}	
+	\begin{column}{0.48\textwidth}
+		\begin{figure}
+			\includegraphics[width=0.8\textwidth,height=0.8\textheight,keepaspectratio]{cubic}
+		\end{figure}
+	\end{column}
+	\begin{column}{0.48\textwidth}
+		\begin{itemize}
+			\item \(C=\{P=0\} \subset \C^2\) smooth with \(\mbox{deg}(P)\geq 2\)
+			\item \emph{Different} asymptotic lines \\
+			i.e. \emph{no} parabola
+		\end{itemize}
+	\begin{center}
+		\begin{minipage}{0.4\textwidth}
+			\begin{block}{}
+				\(\frac{d-2}{d}<\beta<1\)
+			\end{block}
+		\end{minipage}
+	\end{center}
+	\end{column}
+\end{columns}	
+%\begin{equation*}
+%C = \{P=0\}, \hspace{3mm} \mbox{deg}(P) = d\geq 2 .
+%\end{equation*}
+\begin{theorem}[existence]
+	\begin{enumerate}
+		\item \(\omega_{RF}^2 = \Omega \wedge \bar{\Omega}\) with \(\Omega = P^{\beta-1} dz dw \) 
+		\item \(\omega_{RF}\) is asymptotic to a polyhedral K\"ahler cone at infinity.
+	\end{enumerate}
+\end{theorem}
+\end{frame}
+
+
+\begin{frame}{Monge-Amp\`ere equation}
+	
+	\centerline{continuity path: \((\omega_0 + i \ddb \varphi_t)^2 = e^{tf} \omega_0^2\)}
+
+	\begin{center}
+		\scalebox{0.9}{
+		\begin{tikzpicture}[
+		block/.style = {rectangle, rounded corners, fill=yellow!70,
+			text width=0.24\linewidth, align=left,
+			drop shadow}
+		]
+		\node (n1) at (0,0) [block] {Yau's solution of the Calabi conjecture (`78)};
+		\node (n2) at (-4,-4) [block]  {cone singularities (compact)};
+		\node (n3) at (4,-4) [block]  {ALE manifolds (smooth)};
+		\node[draw,circle,fill=red!20] (n4) at (0,-4)   {me};
+		
+		\draw[->, green, thick] (n1) -| (n2);
+		\draw[->, blue, thick] (n1) -| (n3);
+		\draw[->, green, thick, dashed] (n2) -- (n4);
+		\draw[->, blue, thick, dashed] (n3) -- (n4);
+		
+		\node at (0,-1.2) {(smooth, compact)};
+		\node[scale=0.7] at (-4.7,-1.5) {Jeffres};
+		\node[scale=0.7] at (-4.7,-1.8) {Mazzeo};
+		\node[scale=0.7] at (-4.7,-2.1) {Rubinstein};
+		\node[scale=0.9] at (4.7,-1.8) {Joyce};
+		\end{tikzpicture}
+	}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{\(d=2 \to\) \(S^1\)-symmetry}
+	Gibbons-Hawking ansatz
+	\begin{center}
+		\scalebox{0.8}{
+		\begin{tikzpicture}
+		\draw (-5,0) to (1,0);
+		\draw (-2,-3) to (-2,3);
+		%\draw (-4,-2) to (0,2);
+		%\draw (-4,2) to (0,-2);
+		\draw[domain=-5:-2.4,smooth,variable=\x,color=green,thick] plot ({\x},{1/(2+\x});
+		\draw[domain=-1.6:1,smooth,variable=\x,color=green,thick] plot ({\x},{1/(2+\x});
+		%\draw (-2,1.5) ellipse (1.5cm and .15cm);
+		%\draw (-2,-1.5) ellipse (1.5cm and .15cm);
+		\draw (4,0) to (7,0);
+		\draw (5,-2) [color=green,thick] to (5,2.5);
+		\draw (4,-1.333333) to (6.5,2);
+		\draw[domain=5:5.5,smooth,variable=\x] plot ({\x},{1.5+(.25)*(\x-5)});
+		\draw[domain=5:5.5,smooth,variable=\x] plot ({\x},{1.5-(.25)*(\x-5)});
+		\draw (5.5,1.5) ellipse (.05cm and .125cm);
+		\draw[domain=5:5.5,smooth,variable=\x] plot ({\x},{-1+(.25)*(\x-5)});
+		\draw[domain=5:5.5,smooth,variable=\x] plot ({\x},{-1-(.25)*(\x-5)});
+		\draw (5.5,-1) ellipse (.05cm and .125cm);
+		
+		\draw  (5.8,-1) node (asd) [scale=.7] {$2\pi \beta$};
+		\draw (1,2) [->,bend left] to (3.5,2);
+		\draw (6,0) node [shape=circle,draw,fill=black,scale=.5] (asd) {};
+		\draw (6,-.3) node [scale=.6] (asd) {$p$};
+		\draw  (5.8,1.5) node (asd) [scale=.7] {$2\pi \beta$};
+		\draw  (6.8,2.5) node (asd) [scale=.9] {$\mathbf{R}_{\beta}^3=\C_{\beta}\times \mathbf{R}$};
+		\draw  (.5,2.5) node (asd) [scale=.9] {$\mathbf{C}^2$};
+		%\draw  (2.25,2.5) node (asd) [scale=.7] {$\Pi$};
+		\draw  (.8,-.2) node (asd) [scale=.7] {$z$};
+		\draw  (-1.8,2.8) node (asd) [scale=.7] {$w$};
+		%\draw  (-4,2.1) node (asd) [scale=.6] {$|z|=|w|$};
+		%\draw  (-3.2,2) node (asd) [scale=.6] {$s>0$};
+		%\draw  (-3.9,1.3) node (asd) [scale=.6] {$s<0$};
+		%\draw  (5,2.6) node (asd) [scale=.6] {$s$};
+		\draw  (-4.1,-1) node (asd) [scale=.7] [] {$C=\{zw=1\}$};
+		\draw (-2,0) node [shape=circle,draw,fill=black,scale=.5] (asd) {};
+		
+		
+		\draw[domain=.7:.8,smooth,variable=\x,rotate=-15] plot ({\x},{-10.26+4*(\x+2)});
+		\draw[domain=.6:.7,smooth,variable=\x,rotate=-15] plot ({\x},{11.35-4*(\x+2)});
+		\draw[rotate=-15] (.7,0.95) ellipse (.1cm and .05cm);
+		
+		\draw[domain=-2.1:-1.6,smooth,variable=\x,rotate=-15] plot ({\x},{1.825+(.25)*(\x+2)});
+		\draw[domain=-2.1:-1.6,smooth,variable=\x,rotate=-15] plot ({\x},{1.775-(.25)*(\x+2)});
+		\draw[rotate=-15] (-1.6,1.8) ellipse (.05cm and .125cm);
+		
+		\draw  (-.8,2) node (asd) [scale=.7] {$2\pi \beta$};
+		\draw  (1,.9) node (asd) [scale=.7] {$2\pi \beta$};
+		
+		%\node[scale=1.2](c) (10,-5) {\(\Delta_{\beta} \Gamma_p = \delta_p\)};
+		\draw  (5,-2.5) node (asd) [scale=0.9] {$\Delta_{\beta} V = \delta_p$ (Green's function)};
+		\end{tikzpicture}	
+		}
+	\end{center}
+\begin{equation*}
+	g_{RF} = V g_{\mathbf{R}^3_{\beta}} + (1/V)\alpha^2 , \hspace{3mm} d\alpha=-\star_{\beta}dV
+\end{equation*}
+\end{frame}
+
+\begin{frame}{\(L^2\)-norm of the curvature}
+	Chern-Weil: the energy of a KE metric depends only on topology.
+	\[E(g) := \frac{1}{8\pi^2}\int |\mbox{Riem}(g)|^2 \]
+	\begin{center}
+		\scalebox{0.8}{
+			
+			\begin{tikzpicture}
+			%nodes  
+			\node[draw,rounded corners] (a1) at (0,4) {\(E=\chi(X)\)};  
+			\node[draw,rounded corners] (a2) at (0,0)  {\(E=\chi(X) - \frac{1}{|\Gamma|}\)};
+			\node[draw,rounded corners] (a3) at (8,4)  {\(E=\chi(X)+(\beta-1)\chi(C)\)};  
+			\node[fill=red!20,draw,double,rounded corners, scale=1.3] (a4) at (8,0) {\(E(g_{RF}) = 1 + (\beta-1) \chi(C) - \frac{\mbox{vol}(S^3(\bar{g}))}{2\pi^2}\)};  
+			
+			%lines
+			\draw[->,thick,blue] (a1) -- (a2) node[midway,left] {ALE}; 
+			\draw[->,thick,green] (a1) -- (a3) node[midway,below] {cone sing.};  
+			%\draw[->, blue, dashed] (a1) -- (a4);
+			\draw[->,blue,thick,dashed] (a2) -- (a4);
+			\draw[->,green,thick,dashed] (a3) -- (a4);   
+			\end{tikzpicture}	
+		}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{Blow-up limits}
+	Non-collapsed limit space of a KE sequence
+	\begin{center}
+		\scalebox{0.7}{
+		\begin{tikzpicture}
+		%sequence
+		\filldraw[orange!20] (-4,0) circle[radius=2]; 
+		\filldraw[orange!20] (4,0) circle[radius=2]; 
+		\draw[->, dashed] (-1.5,0) to (1.5,0) node[midway,above] {Gromov-Hausdorff};
+		\draw [green, thick] plot [smooth, tension=.7] coordinates { (-5.5,0) (-4,-1) (-3,0) (-4,1) (-4.5,-.1)};
+		\draw [green, thick] plot [smooth, tension=.7] coordinates { (3,0) (5,0) (4,1.5) (4,-1)};
+		%blowup
+		\filldraw[orange!20] (-2,-6.5) rectangle (2,-2.5);
+		\draw[green,thick] (0,-3) arc(190:260:2);
+		\draw[green,thick] (0,-6) arc(10:80:2);	
+		\node[scale=1.3](a) at (-1.3,-3){\(\C^2\)};
+		%scale
+		\node[draw,circle,scale=2] (a1) at (3.95,-0.1) {}; 
+		\node (a2) at (6,-4) {scaling};
+		\node at (6,-4.4) {(along the seq.)};
+		\node (a3) at (2.2,-4.5) {};
+		\draw[->, dashed] (a1) .. controls (a2) .. (a3);
+		%nodes
+		%\node[scale=1.3](a) at (0,-1){\(X\)};
+		%\filldraw[orange!20] (0,-3.5) circle[radius=2];
+		\end{tikzpicture}	
+		}
+	\end{center}
+\end{frame}
+
+\section{Postdocs}
+
+
+\begin{frame}{KLT pairs}
+	\begin{columns}
+		\begin{column}{0.48\textwidth}
+			\begin{center}
+				\scalebox{0.8}{
+					\begin{tikzpicture}
+					%sequence
+					\filldraw[orange!20] (0,0) circle[radius=4]; 
+					\draw [green, thick] plot [smooth, tension=.7] coordinates { (-3.5,0) (-3,-1) (-1,1) (-2.5, 0) (-1,0) (0,1) (2.5,-.1)};
+					\draw [blue, thick] plot [smooth, tension=.7] coordinates { (3.6,0) (3,0) (2,1.5) (1,-1)};
+					\draw[red,thick] (-1,-.5) arc(270:350:2);
+					\draw[red,thick] (-1,-.5) arc(90:10:2);
+					
+					%nodes
+					\node[scale=1.3](a) at (0,2.7){\(X\)};
+					\node[green] at (-3,.5) {\(D_1\)};
+					\node[red] at (-1,-1) {\(D_2\)};
+					\node[blue] at (3.3,.7) {\(D_3\)};
+					%\filldraw[orange!20] (0,-3.5) circle[radius=2];	
+					\end{tikzpicture}
+				}
+			\end{center}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\[(X, \sum_i (1-\beta_i) D_i)\]
+			\[D_i = \{s_i=0\}\]
+			\\
+			\[\mathcolorbox{yellow}{
+				\prod_i |s_i|^{2\beta_i-2} \in L^1_{loc} 
+			}	\]	
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Tangent cones (overview)}
+	Non-collapsed polarized KE limit space \((X, d_{KE})\)
+	\[C_p X := \lim_{\lambda \to 0} (X, \lambda^{-1}d_{KE},p)\]
+	\begin{itemize}
+		\item Uniqueness, \(C_pX\) is an affine algebraic variety (Donaldson-Sun).\\
+		Order of vanishing w.r.t. \(d_{KE}\) \(\implies\) two steps degeneration.
+		\item \(C_pX\) depends only on \(\mathcal{O}_{X,p}\) (the germ of \(X\) at \(p\)). \\
+		Chi Li's normalized volumes of valuations.
+	\end{itemize}
+	
+	Sasaki geometry precedents: Martelli-Sparks-Yau (volume minimization),
+	Collins-Sz\'ekelyhidi (K-stability) .
+	\begin{block}{Question}
+		Identify tangent cones of weak KE metrics on KLT (surface) pairs.
+	\end{block}
+\end{frame}
+
+\begin{frame}{Stable case (joint with C. Spotti)}
+	\begin{columns}
+		\begin{column}{0.48\textwidth}
+			\begin{center}
+				\scalebox{0.8}{
+				\begin{tikzpicture}
+				%lines
+				\draw (-4,0) to (4,0);
+				\draw (-4,-2) to (2,4);
+				\draw (4,-2) to (-2,4);
+				\draw (0, -2) to (0,4);
+				\draw (-4,-2/3) to (3,5/3);	
+				\draw (4,-2/3) to (-3,5/3);
+				
+				%nodes
+				\draw (-2,0) node [shape=circle,draw, fill=yellow, scale=.8] (asd) {\(x_2\)};
+				\draw (2,0) node [shape=circle,draw, fill=yellow, scale=.8] (asd) {\(x_3\)};
+				\draw (0,2/3) node [shape=circle,draw, fill=yellow, scale=.8] (asd) {\(x_1\)};
+				\draw (0,2) node [shape=circle,draw, fill=yellow, scale=.8] (asd) {\(x_4\)};
+				\draw (-1,1) node [shape=circle,draw,fill=blue,scale=.5] (asd) {};
+				\draw (0,0) node [shape=circle,draw,fill=blue,scale=.5] (asd) {};
+				\draw (1,1) node [shape=circle,draw,fill=blue,scale=.5] (asd) {};
+				
+				%labels
+				\draw  (0.4,-1.9) node (asd) [scale=.9] {\(L_{23}\)};
+				\draw  (3.4, 1.8) node (asd) [scale=.9] {\(L_{34}\)};
+				\draw  (-3.4,1.8) node (asd) [scale=.9] {\(L_{24}\)};
+				\draw  (-2,3.5) node (asd) [scale=.9] {\(L_{12}\)};
+				\draw  (2,3.5) node (asd) [scale=.9] {\(L_{13}\)};
+				\draw  (1,-.3) node (asd) [scale=.9] {\(L_{14}\)};
+				%\draw  (-2.7, 2.7) node (asd) [scale=1.1, color=red] {\((\mathbf{CP}^2, \sum_{i<j} \mu_{ij} L_{ij} ) \)};
+				\end{tikzpicture}
+			}
+			\end{center}
+		\end{column}
+	\begin{column}{0.35\textwidth}
+		\((\mathbf{CP}^2, \sum_k \mu_k L_k)\) KLT line arrangement, here \(\mu_k=1-\beta_k\). Assume that
+		\begin{itemize}
+			\item Calabi-Yau condition: \(\sum_k \mu_k =3\);
+			\item Troyanov holds at points with multiplicity \(\geq 3\) .
+		\end{itemize}
+		\(\implies\) tangent cones at multiple points are the obvious PK cones.
+	\end{column}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}{Strictly unstable case (joint with G. Edwards)}
+	\begin{columns}
+		\begin{column}{0.48\textwidth}
+			\begin{center}
+				\scalebox{0.8}{
+					\begin{tikzpicture}
+					%threelines
+					\draw (5,2) to (5,4);
+					\draw (3,2) to (7,4);
+					\draw (3,4) to (7,2);
+					\draw[green,thick] (6,2) to (6,4);
+					
+					%truncatedwedge
+					\fill[yellow!60] (5.5, 0) -- (8, 0) -- (8, 2) -- (6, 1) ;
+					\draw[dashed] (4, 0) to (5.5,0);
+					\draw[] (5.5, 0) to (8,0);
+					\draw[dashed] (4, 0) to (6,1);
+					\draw[] (6, 1) to (8, 2);
+					\draw[red, ultra thick] (5.5, 0) to (6,1);
+					\centerarc[](5.5,0)(0:60:.3);
+					\centerarc[](6,1)(-105:15:.3);
+					\centerarc[](4,0)(0:30: .5);
+					
+					%labels
+					\draw  (4, -0.3) node (asd) [scale=.9] {\(\pi \gamma\)};
+					\draw  (5.5, -.3) node (asd) [scale=.9] {\(\pi \beta_2\)};
+					\draw  (6.6, .8) node (asd) [scale=.9] {\(\pi \beta_3\)};
+					\node at (5,4.2) {\(L_1\)};
+					\node at (6.5,3.4) {\(L_2\)};
+					\node at (6.5,2.5) {\(L_3\)};
+					\node[scale=0.9] at (5.5,-.8) {\((1-\gamma) = (1-\beta_2) + (1-\beta_3) \)};
+					\end{tikzpicture}
+				}
+			\end{center}
+		\end{column}
+		\begin{column}{0.45\textwidth}
+			Let \(L_i = \{\ell_i=0\}\) and \(0< \beta_1 < \beta_2 \leq \beta_3 < 1\). Assume that
+			\[\mathcolorbox{green!40}{
+				(1-\beta_2) + (1-\beta_3) < (1-\beta_1)
+			}
+			\] 
+			Then
+			\begin{itemize}
+				\item \(\omega_{RF}^2 =\Omega \wedge \bar{\Omega}\)
+				\item \(C_0 \omega_{RF} = \C_{\beta_1} \times \C_{\gamma}\)
+			\end{itemize}
+			where \(\Omega = \ell_1^{\beta_1-1}\ell_2^{\beta_2-1} \ell_3^{\beta_3-1}dzdw\)
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{My papers}
+	\scriptsize{
+	\begin{enumerate}
+		\item  \emph{Calabi-Yau metrics with cone singularities along intersecting complex lines} (with G. Edwards); forthcoming.
+		\item \emph{Toric Sasaki-Einstein metrics with conical singularities} (with E. Legendre); arXiv, 2020.
+		\item \emph{Schauder estimates on products of cones} (with G. Edwards); arXiv, 2020.
+		\item \emph{ALE Calabi-Yau metrics with conical singularities along compact divisors} (with C. Spotti); International Mathematics Research Notices, 2019.
+		\item \emph{Local models for K\"ahler-Einstein metrics} (with C. Spotti); Proceedings of the AMS, 2018.
+		\item \emph{Calabi-Yau metrics with cone singularities along line arrangements}  (with C. Spotti); arXiv, 2017.
+		\item \emph{Asymptotically conical Ricci-flat K\"ahler metrics on \(\C^2\) with cone singularities along a complex curve}; Journal of the London Mathematical Society, 2017.
+		\item \emph{The Gibbons-Hawking ansatz over a wedge}; Journal of Geometry and Physics, 2017.
+		\item \emph{K\"ahler metrics with cone singularities along a divisor of bounded Ricci curvature}; Annals of Global Analysis and Geometry, 2017.
+		\item \emph{Singularities of plane complex curves and limits of K\"ahler metrics with cone singularities. I: Tangent cones}; Complex Manifolds, 2017.
+	\end{enumerate}
+}
+\end{frame}
+
+
+
+
+\end{document}
