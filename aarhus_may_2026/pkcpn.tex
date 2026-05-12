@@ -23,6 +23,8 @@
 \usepackage{tikz}
 \usetikzlibrary{shapes,snakes,arrows, chains, positioning, shapes.geometric, shapes.symbols,calc,shadows}
 
+
+
 %tikzxommand
 \def\centerarc[#1](#2)(#3:#4:#5)% Syntax: [draw options] (center) (initial angle:final angle:radius)
 { \draw[#1] ($(#2)+({#5*cos(#3)},{#5*sin(#3)})$) arc (#3:#4:#5); }
@@ -33,11 +35,14 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\CP}{\mathbb{CP}}
 \newcommand{\mM}{\mathcal{M}}
+\newcommand{\mL}{\mathcal{L}}
 
 \newcommand{\mH}{\mathcal{H}}
 
 \newcommand{\ddb}{\partial\overline{\partial}}
 \DeclareMathOperator{\Met}{Met}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\mul}{mult}
 \DeclareMathOperator{\hot}{(h.o.t.)}
 
 \newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
@@ -49,41 +54,108 @@
 
 \begin{document}
 
+
 \begin{frame}
   \titlepage
 \end{frame}
 
 
+\begin{frame}{Outline}
+	\begin{itemize}
+		\setlength{\itemsep}{\fill}
+		\item Main result
+		
+		
+		\item Sketch proof  
+		
+		\item Conjectures
+	\end{itemize}
+\end{frame}
 
-\section{Introduction}
-
-\begin{frame}
+\section{Main result}
+\begin{frame}{Main result}
 	\begin{theorem}[dB-Panov, 2025-26]
-		Let \(H_1, \ldots, H_n\) be complex hyperplanes in \(\CP^d\) with \(d \geq 1\) and let \(a_1, \ldots, a_n\) be real numbers in the open interval \((0,1)\). Suppose that the weighted arrangement \(\{(H_i, a_i)\}_{i=1}^n\) satisfies the following conditions:
+		Let \(\mH = \{H_1, \ldots, H_n\}\) be a hyperplane arrangement in \(\CP^d\) with \(d \geq 1\). Let \(\alpha_1, \ldots, \alpha_n \in (0,1)\). Write \(a_i = 1-\alpha_i\). Assume that:
 		\begin{enumerate}
-			\item \(\sum_{i=1}^{n} a_i = d+1\), i.e., the log pair \((\CP^d, \sum a_i H_i)\) is Calabi-Yau;
-			\item \textbf{stable}, i.e., the log pair \((\CP^d, \sum a_i H_i)\) is klt.
+			\item\label{it:cy} \(\sum_{i=1}^{n} a_i = d+1\)
+			\item the weighted arrangement \(\{(H_i,a_i)\}_{i=1}^n\) is \textbf{stable}
 		\end{enumerate}
 		Then the following inequality holds:
 		\begin{equation}\label{eq:my}
 		Q(a_1, \ldots, a_n) \leq 0 	
 		\end{equation}
-		where \(Q\) is the \textbf{Hirzebruch quadratic form} of the hyperplane arrangement \(\mH = \{H_1, \ldots, H_n\}\). 
-		Moreover, the equality holds in \eqref{eq:my} if and only if there exists a \textbf{polyhedral K\"ahler metric} on \(\CP^d\) with cone angles \(2\pi\alpha_i\) along the hyperplanes \(H_i\), where \(\alpha_i = 1-a_i\).
+		where \(Q\) is the \textbf{Hirzebruch quadratic form} of \(\mH\). 
+		Moreover, the equality holds if and only if there exists a \textbf{polyhedral K\"ahler metric} on \(\CP^d\) with cone angles \(2\pi\alpha_i\) along \(H_i\).
 	\end{theorem}
 \end{frame}
 
-\begin{frame}{Outline}
+\section{hyperplane arrangements}
+\begin{frame}{Hyperplane arrangements: basics and notation}
 	\begin{itemize}
-		\setlength{\itemsep}{\fill}
-		\item \(\dim_{\C} = 1\): Degeneration of polyhedral metrics on the \(2\)-sphere
-		
-		
-		\item \(\dim_{\C} = 2\): Model Calabi-Yau metrics on \(\C^2\) with cone singularities along a complex curve  
-		
-		\item Conjectures
+		\item A \textbf{hyperplane arrangement} is a finite set \(\mH = \{H_1, \ldots, H_n\}\) of pairwise distinct complex hyperplanes \(H_i \subset \CP^d\)
+		\item Index set \([n]=\{1, \ldots, n\}\)
+		\item The \textbf{intersection poset} of \(\mH\) is the set of all proper linear subspaces obtained by intersecting hyperplanes in \(\mH\)
+		\[
+		\mL = \big\{L \subset \CP^d \,\mid\, L = \bigcap_{i \in I} H_i \textup{ for some non-empty } I \subset [n]\big\}
+		\]
+		\item The \textbf{rank} of \(L \in \mL\) is defined as
+		\[
+		r(L) = \codim (L \subset \CP^d) 
+		\]
+		Take the convention that \(r(\emptyset) = d+1\)
+		\item \(\mL^k = \{L \in \mL \,\mid\, r(L) =k\}\)
+		\item The \textbf{multiplicity} of an element \(L \in \mL\) is defined as
+		\[
+		\mul(L) = \big| \{i \,|\, H_i \supset L\} \big|
+		\]
 	\end{itemize}
 \end{frame}
+
+\begin{frame}{Stability}
+	A weighted arrangement \(\{(H_i, a_i)\}_{i=1}^n\) consisting of hyperplanes \(H_i \subset \CP^d\) together with weights \(a_i>0\) is \textbf{stable} if 
+	\[
+	\forall L \in \mL \setminus \{\emptyset\}: \quad
+	\frac{1}{r(L)} \cdot \sum_{i \mid H_i \supset L} a_i < \frac{1}{d+1} \cdot \sum_{i=1}^{n} a_i
+	\]
+	Suppose that 
+	\begin{equation}\label{eq:cy}
+		\sum_{i=1}^{n} a_i = d+1	
+	\end{equation}
+	Then stability is equivalent to
+	\begin{equation}\label{eq:klt}
+		\forall L \in \mL \setminus \{\emptyset\}: \quad	\sum_{i \mid H_i \supset L} a_i < r(L)
+	\end{equation}
+	Let \((X, \Delta)\) be the log pair \((\CP^d, \sum a_i H_i)\). 
+	\[
+	\begin{aligned}
+		\textup{Equation \eqref{eq:cy}} &\iff (X, \Delta) \textup{ is Calabi-Yau} \\
+		\textup{Equation \eqref{eq:klt}} &\iff (X, \Delta) \textup{ is klt}
+	\end{aligned}
+	\]
+	
+
+\end{frame}
+
+\section{hirzebruch qf}
+\begin{frame}
+	\frametitle{The Hirzebruch quadratic form}
+	Let \(\mH = \{H_1, \ldots, H_n\}\) be a hyperplane arrangement in \(\CP^d\).
+	The \textbf{Hirzebruch quadratic form} of \(\mH\) is the homogeneous degree \(2\) polynomial on \(\R^n\) given by
+		\[
+	Q(x_1, \ldots, x_n) = \sum_{i,j = 1}^k Q_{ij} x_i x_j 
+	\]
+	\[
+	\mathcolorbox{green!20}{
+		Q_{ij} = \begin{cases}
+			- (d+1) \sigma_i + 2d &\text{ if } i = j  \\
+			-2 &\text{ if }  i \neq j \text{ and } \mul \big(H_i \cap H_j\big) = 2  \\
+			\,\, d-1 &\text{ if } i \neq j \text{ and } \mul \big(H_i \cap H_j\big) \geq 3 
+		\end{cases}
+	}
+	\]
+	where \(\sigma_i = \left| \{L \in \mL^2 \,|\, L\subset H_i \,,\, \mul(L) \geq 3 \}\right|\) 
+\end{frame}
+
 
 \section{dim 1}
 
