@@ -85,6 +85,35 @@
 \end{frame}
 
 \section{Riemann surfaces}
+
+\begin{frame}
+	\frametitle{Metrics on surfaces with conical singularities}
+	\pause
+	Let \(\Sigma\) be a compact orientable 2D surface.
+	\pause
+	Let \(p_1, \ldots, p_n \in \Sigma\) and let \(\alpha_1, \ldots, \alpha_n >0\).
+	\pause
+	Let \(g\) be a metric on \(\Sigma \setminus \{p_1, \ldots, p_n\}\) with constant curvature \(K = 1, 0, -1\) that near \(p_i\) is locally isometric to
+	\[
+	\begin{cases}
+	dr^2 + \alpha_i^2 \sin^2(r) d\theta^2 \\
+	dr^2 + \alpha_i^2 r^2 d\theta^2 \\
+	dr^2 + \alpha_i^2 \sinh^2(r) d\theta^2 
+	\end{cases}
+	\]
+	\pause
+	Examples: double of a polygon;
+	\pause 
+	surface of a polyhedron.
+	\pause
+	\textbf{Gauss-Bonnet}
+	\[
+	\frac{1}{2\pi} \int_{\Sigma} K dA = \chi(\Sigma) + \sum_{i=1}^{n} (\alpha_i-1)
+	\]
+	\pause
+	Metric + orientation \(\implies\) Riemann surface \(X\) 
+\end{frame}
+
 \begin{frame}
 	\frametitle{McOwen (1988), Troyanov (1991)}
 	\pause
@@ -102,7 +131,11 @@
 		\pause
 		\item If \(\chi(X, \bm{\alpha}) =0\) then there exists a unique up to scale  K\"ahler metric on \(X\) with \(K_g = 0\) and cone angle \(2\pi\alpha_i\) at \(x_i\)
 		\pause
-		\item If \(\chi(X, \bm{\alpha}) > 0\). Furthermore, assume that \(\alpha_i \in (0,1)\) and \(n \geq 3\). Then there exists a unique  K\"ahler metric on \(X = \CP^1\) with \(K_g = 1\) and cone angle \(2\pi\alpha_i\) at \(x_i\) if and only if
+		\item If \(\chi(X, \bm{\alpha}) > 0\). 
+		\pause
+		Furthermore, assume that \(\alpha_i \in (0,1)\) and \(n \geq 3\).
+		\pause
+		Then there exists a unique  K\"ahler metric on \(X = \CP^1\) with \(K_g = 1\) and cone angle \(2\pi\alpha_i\) at \(x_i\) if and only if
 		\[
 		\forall i \quad
 		a_i < \frac{1}{2} \cdot \sum_{i=1}^{n} a_i  \quad \textup{ where } a_i = 1-\alpha_i
@@ -115,17 +148,25 @@
 \begin{frame}
 	\frametitle{Main result}
 	\pause
-	\begin{theorem}[dB-Panov, 2025-26]
-		Let \(\mH = \{H_1, \ldots, H_n\}\) be a hyperplane arrangement in \(\CP^d\) with \(d \geq 1\). Let \(\alpha_1, \ldots, \alpha_n \in (0,1)\). Write \(a_i = 1-\alpha_i\). Assume that:
+	\begin{theorem}[Panov 2009 when \(d=2\), dB-Panov 2025-26 for \(d \geq 2\)]
+		Let \(\mH = \{H_1, \ldots, H_n\}\) be a hyperplane arrangement in \(\CP^d\) with \(d \geq 1\). 
+		\pause
+		Let \(\alpha_1, \ldots, \alpha_n \in (0,1)\). Write \(a_i = 1-\alpha_i\). 
+		\pause
+		Assume that:
 		\begin{enumerate}
+			\pause
 			\item\label{it:cy} \(\sum_{i=1}^{n} a_i = d+1\)
+			\pause
 			\item the weighted arrangement \(\{(H_i,a_i)\}_{i=1}^n\) is \textbf{stable}
 		\end{enumerate}
+		\pause
 		Then the following inequality holds:
 		\begin{equation}\label{eq:my}
 		Q(a_1, \ldots, a_n) \leq 0 	
 		\end{equation}
 		where \(Q\) is the \textbf{Hirzebruch quadratic form} of \(\mH\). 
+		\pause
 		Moreover, the equality holds if and only if there exists a \textbf{polyhedral K\"ahler \textup{(PK)}} metric on \(\CP^d\) with cone angles \(2\pi\alpha_i\) along \(H_i\).
 	\end{theorem}
 \end{frame}
@@ -143,7 +184,7 @@
 \section{proof}
 \begin{frame}
 	\frametitle{Sketch proof}
-	Follow Panov (2009) who proved the theorem for \(d=2\) 
+	Follow Panov (2009) 
 	\begin{itemize}
 		\pause
 		\item Take a log resolution \(\pi: X \to \CP^d\)
